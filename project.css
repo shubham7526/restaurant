@@ -1,0 +1,89 @@
+
+
+.logo{
+    height: 80px;
+}
+
+img{
+   height: 100%;
+   width: 140px;
+}
+
+.company-name{
+    margin-left: -14px;
+    padding-left: 544px;
+    padding-top: 7px;
+    width: 100%;
+}
+
+.company-name > span{
+    color: blue;
+}
+
+.container{
+    margin-top: 10px;
+}
+
+.food-menu{
+    /* border: 3px solid black; */
+    
+    height: 850px;
+    margin: 0px;
+    overflow-y: auto;
+    background-color: sandybrown;
+  
+}
+
+.food-card{
+    border: 1px solid mediumseagreen;
+    background-color: khaki;
+    height: 182px;
+    width: 245px;
+    margin: 10px;
+    
+}
+
+.food-card > button{
+    width: 50px;
+    margin-left: 177px;
+    margin-bottom: -12px;
+}
+
+
+
+.add-list{
+    /* border: 3px solid black; */
+    margin-left: 10px;
+    background-color: burlywood;
+    height: 500px;
+    
+    /* position: fixed; */
+}
+
+.add-list > h3{
+    /* border-bottom: 2px solid black; */
+    background-color: darkorange;
+    color: azure;
+}
+
+.add-list-content{
+    height: 86%;
+    overflow-y: auto;
+}
+
+.cancel-btn{
+    padding: 0px 16px;
+}
+
+.buy-option{
+    width: 100%;
+    background-color: indianred;
+    color: white;   
+}
+
+input{
+    width: 40px;
+    margin-right: 3px;
+    border-radius: 10%;
+    border-color: burlywood;
+}

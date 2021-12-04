@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        
+    <Link rel="stylesheet" type="text/css" href="./project.css"/>
+
+</head>
+<body>
+    <div class="d-flex ">
+       <div class="logo col-1"><img src="./images.png" /></div>
+       <div class="company-name  bg-warning fw-bolder fs-1 d-flex text-light">Zoop<span>Taste</span><sub><h6 style="color: black;">"The taste of India"</h6></sub></div>
+    </div>
+
+    <div class="container d-flex " >
+        <div class="food-menu col-10 d-flex flex-wrap">
+
+        </div>  
+           
+            
+        <div class="add-list col-3">
+            <h3 class="text-center">Your Cart</h3>
+            <div class="add-list-content"></div>
+            <div class="fw-bold">
+                Total Price: 
+                <span class="total-value">0</span> 
+            </div>
+            <button class="buy-option btn" onclick="msg("hello ji")">Buy Now</button>
+        </div>
+        
+    </div>
+</body>
+<script>
+   const foodName = [{itemName: "Dosa", price: 220}, {itemName: "Idli-Sambhar",price:130 }, {itemName: "Puri-Sabji", price:200}, {itemName: "Veg-Biryani", price:300}, {itemName: "Kachaudi", price:120}, {itemName: "Samosa", price:120}, {itemName: "Jalebi", price:120}, {itemName: "Amirti", price:120}, {itemName: "Roti-Sabji", price:120}, {itemName: "Thali", price:120}, {itemName: "Spacial-Thali", price:120}, {itemName: "large-Thali", price:120}, {itemName: "Medium-Thali", price:120}, {itemName: "Burger", price:120}, {itemName: "Pizza", price:120}, {itemName: "Gold-Pizza", price:120}, {itemName: "Wheat-Pizza", price:120},];
+   let addedItemList = [];
+    let foodCard = foodName.map((i, idx) =>{
+        return `<div class="food-card btn d-flex justify-content-around flex-column align-items-center ">
+                        <div class="food-name${idx} fs-2">${i.itemName} </div>
+                        <div style="color: rgb(173, 96, 192); font-size: medium;" >Price(Rs): <span class="price-value${idx}">${i.price}</span></div>
+                        <button class="btn btn-danger" onclick="addItem({number: ${idx},itemName: '${i.itemName}',itemPrice: '${i.price}', itemOriginalPrice: '${i.price}',quantity: '${1}'})" >Add</button>
+                </div>`
+    }).join(" ")
+
+    document.querySelector(".food-menu").innerHTML = foodCard;
+
+    function handleQuantity (el, number){
+        console.log(number)
+        const index = addedItemList.findIndex(i => i.number == number)
+        //console.log(number)
+        
+        addedItemList[index].quantity =  parseInt(el.value);
+        addedItemList[index].itemPrice = parseInt(el.value)* parseInt(addedItemList[index].itemOriginalPrice);
+
+        addedItemList.splice(index, 1, addedItemList[index]);
+        creatCart(); 
+    }
+
+    let cancelItem = (number, itemName, itemPrice, quantity)=>{
+        const index = addedItemList.findIndex(i => {
+            
+               return i.number ==number
+            })
+
+        addedItemList.splice(index, 1);
+            creatCart();  
+    }
+
+    let addItem = (data) =>{
+
+        addedItemList.push(data);
+
+        //      let result = addedItemList.find( ({ itemName }) => itemName ==='addedItemList.itemName' );
+        // console.log(number);
+        // let result = addedItemList.includes(number);
+        // console.log(result);
+        creatCart();  
+
+    }
+    
+
+    const msg = (text) => alert (text || "Thanks For Visting on ZoopTest");
+    
+    
+    const totalPriceCount = ()=>{
+
+        let totalPrice = 0;
+        addedItemList.map(i =>{
+            totalPrice += parseInt(i.itemPrice);
+        })
+        
+        return totalPrice;
+    }
+
+    const creatCart = ()=>{
+        document.querySelector(".add-list-content").innerHTML = addedItemList.map(item => {
+                return `<div class=" d-flex justify-content-between add-list-item${item.number}  m-1">
+                            <div>
+                                <span>${item.itemName}</span>
+                                <span class="price-value bg-info"> Price:${item.itemPrice}</span> 
+                            </div>
+                            <div>    
+                                <input type="number" onchange="handleQuantity(this, ${item.number})" value="${item.quantity}"/>
+                                <button class="btn cancel-btn btn-light" onclick="cancelItem(${item.number},'${item.itemName}','${item.price}')">X</button>
+                            </div> 
+                        </div>`;                                                  
+        }).join("");
+        document.querySelector(".total-value").innerHTML =  totalPriceCount();
+    }  
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    
+</html>
